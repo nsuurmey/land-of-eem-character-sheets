@@ -10,7 +10,7 @@ It was created by Ben Costa and James Parks, the team behind Rickety Stitch and 
 
 The game blends wonder, humor, and classic adventure in a setting often described as “Lord of the Rings meets The Muppets.”
 
-To learn more, visit the official site at landofeem.com.
+To learn more, visit [Land of Eem](https://landofeem.com)!
 
 ## Features
 
