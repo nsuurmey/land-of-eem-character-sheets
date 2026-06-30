@@ -18,6 +18,7 @@ import {
   handleGmModalSubmit,
   showEditMenu,
 } from './handlers/gmedit.js';
+import { handleAbout, handleLicense } from './handlers/info.js';
 import { encode, decode } from './ids.js';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -63,7 +64,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
     if (interaction.isChatInputCommand()) {
       const { commandName } = interaction;
 
-      if (commandName === 'character') {
+      if (commandName === 'about') {
+        await handleAbout(interaction);
+
+      } else if (commandName === 'license') {
+        await handleLicense(interaction);
+
+      } else if (commandName === 'character') {
         const sub = interaction.options.getSubcommand();
         if (sub === 'create') await handleCharacterCreate(interaction);
 

@@ -1,3 +1,11 @@
+// SPDX-License-Identifier: Apache-2.0
+// Original software copyright [YEAR] [YOUR NAME]. See LICENSE.
+//
+// SRD-DERIVED CONTENT: Field labels (Vim, Vigor, Knack, Knowhow, Courage, Dread,
+// Quest Points) and card layout terminology are derived from the Land of Eem SRD
+// and governed by the Land of Eem Open License. See LICENSES/LAND-OF-EEM-OPEN-LICENSE.md.
+// They are NOT licensed under Apache 2.0.
+
 import {
   EmbedBuilder,
   ActionRowBuilder,

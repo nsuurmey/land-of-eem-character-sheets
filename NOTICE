@@ -1,0 +1,60 @@
+Land of Eem Character Sheet Bot
+Copyright [YEAR] [YOUR NAME]
+https://github.com/nsuurmey/land-of-eem-character-sheets
+
+========================================================================
+APACHE LICENSE 2.0 — ORIGINAL SOFTWARE
+========================================================================
+
+The original source code of this project (all files in src/, scripts/,
+build-docs/, and configuration files such as package.json, tsconfig.json,
+.env.example) is copyright [YEAR] [YOUR NAME] and licensed under the
+Apache License, Version 2.0 (the "License"); you may not use those files
+except in compliance with the License. You may obtain a copy of the
+License at:
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+========================================================================
+LAND OF EEM OPEN LICENSE — SRD-DERIVED CONTENT
+========================================================================
+
+Certain game terminology, rule structures, result band definitions, and
+attribute names in this project are derived from the Land of Eem System
+Reference Document (SRD) and are used under the Land of Eem Open License
+(LOEL).
+
+Land of Eem SRD-derived content is NOT licensed under Apache 2.0.
+It is governed solely by the LOEL.  The full LOEL text is reproduced in:
+
+    LICENSES/LAND-OF-EEM-OPEN-LICENSE.md
+
+Files in this repository that contain SRD-derived content carry a header
+comment identifying them as such.  See that file for the authoritative
+license terms.
+
+Land of Eem is a trademark of its creators.  [verify trademark holder
+against LOEL text]  This project is not official, not endorsed by, and
+not affiliated with the creators or publishers of Land of Eem.
+
+========================================================================
+THIRD-PARTY NOTICES
+========================================================================
+
+discord.js — Apache License 2.0
+https://github.com/discordjs/discord.js/blob/main/LICENSE
+
+better-sqlite3 — MIT License
+https://github.com/WiseLibs/better-sqlite3/blob/master/LICENSE
+
+dotenv — BSD-2-Clause License
+https://github.com/motdotla/dotenv/blob/master/LICENSE
+
+tsx — MIT License
+https://github.com/privatenumber/tsx/blob/develop/LICENSE
