@@ -1,3 +1,10 @@
+// SPDX-License-Identifier: Apache-2.0
+// Original software copyright [YEAR] [YOUR NAME]. See LICENSE.
+//
+// SRD-DERIVED CONTENT: KEY_LABELS values (Vim, Vigor, Knack, Knowhow) are Land of
+// Eem attribute names from the SRD, governed by the Land of Eem Open License.
+// See LICENSES/LAND-OF-EEM-OPEN-LICENSE.md. They are NOT licensed under Apache 2.0.
+
 import { ButtonInteraction, MessageFlags } from 'discord.js';
 import { getCharById } from '../db.js';
 import { decode } from '../ids.js';

@@ -31,6 +31,14 @@ const commands = [
     ),
 
   new SlashCommandBuilder()
+    .setName('about')
+    .setDescription('About this bot and its compatibility with Land of Eem'),
+
+  new SlashCommandBuilder()
+    .setName('license')
+    .setDescription('View licensing information for bot code and Land of Eem SRD content'),
+
+  new SlashCommandBuilder()
     .setName('gm')
     .setDescription('GM-only commands')
     .addSubcommand(sub =>

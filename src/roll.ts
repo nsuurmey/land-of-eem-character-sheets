@@ -1,3 +1,12 @@
+// SPDX-License-Identifier: Apache-2.0
+// Original software copyright [YEAR] [YOUR NAME]. See LICENSE.
+//
+// SRD-DERIVED CONTENT: The Band type values and the numeric ranges in bandFor()
+// (Complete Failure 1-2, Failure with a Plus 3-5, Success with a Twist 6-8,
+// Success 9-11, Complete Success 12+) are derived from the Land of Eem SRD and
+// governed by the Land of Eem Open License. See LICENSES/LAND-OF-EEM-OPEN-LICENSE.md.
+// They are NOT licensed under Apache 2.0.
+
 export type Band =
   | 'Complete Failure'
   | 'Failure with a Plus'

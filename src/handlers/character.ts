@@ -1,3 +1,14 @@
+// SPDX-License-Identifier: Apache-2.0
+// Original software copyright [YEAR] [YOUR NAME]. See LICENSE.
+//
+// SRD-DERIVED CONTENT: The "Folk", "Class", and "Homeland" field labels are Land of
+// Eem character creation terminology from the SRD, governed by the Land of Eem Open
+// License. See LICENSES/LAND-OF-EEM-OPEN-LICENSE.md. They are NOT licensed under Apache 2.0.
+//
+// REVIEW REQUIRED: The placeholder text "Hobble, Mellow" in the Folk label may reference
+// setting-specific folk names not included in the SRD. Verify these names appear in the
+// LOEL/SRD before publishing. Replace with generic text (e.g. "your folk") if uncertain.
+
 import {
   ChatInputCommandInteraction,
   ModalBuilder,

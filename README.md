@@ -4,13 +4,11 @@ A Discord bot for play-by-post *Land of Eem* games. Stores character sheets and 
 
 ## The Game Land of Eem
 
-Land of Eem is a whimsical fantasy tabletop roleplaying game about adventurers exploring the strange ruins and stories of a forgotten age.
+*Land of Eem* is a whimsical fantasy tabletop roleplaying game created by **Ben Costa and James Parks**.
 
-It was created by Ben Costa and James Parks, the team behind Rickety Stitch and the Gelatinous Goo and Dungeoneer Adventures.
+To learn more, visit [landofeem.com](https://landofeem.com).
 
-The game blends wonder, humor, and classic adventure in a setting often described as “Lord of the Rings meets The Muppets.”
-
-To learn more, visit [Land of Eem](https://landofeem.com)!
+> **Compatibility notice:** This bot is not official, not endorsed by, and not affiliated with the creators or publishers of *Land of Eem*.
 
 ## Features
 
@@ -180,3 +178,29 @@ The `/gm edit` flow presents a select menu of groups, each opening a prefilled m
 - **Config:** dotenv
 
 Gateway intents: `Guilds` only. No privileged intents required.
+
+---
+
+## Licensing & Compliance
+
+This project uses **two licenses**. They apply to different parts of the codebase.
+
+### Original source code — Apache License 2.0
+
+All original TypeScript source code, configuration files, scripts, and build documentation are copyright [YEAR] [YOUR NAME] and licensed under the **Apache License, Version 2.0**. See [`LICENSE`](LICENSE).
+
+### Land of Eem SRD-derived content — Land of Eem Open License
+
+Game terminology, result band definitions (Complete Failure, Failure with a Plus, Success with a Twist, Success, Complete Success), and attribute names (Vim, Vigor, Knack, Knowhow, Courage, Dread, Quest Points) are derived from the *Land of Eem* System Reference Document (SRD). This content is governed by the **Land of Eem Open License (LOEL)** and is **not** licensed under Apache 2.0.
+
+See [`LICENSES/LAND-OF-EEM-OPEN-LICENSE.md`](LICENSES/LAND-OF-EEM-OPEN-LICENSE.md) for the full LOEL text and a list of which files contain SRD-derived content.
+
+### Attribution & disclaimer
+
+*Land of Eem* was created by **Ben Costa and James Parks**. "Land of Eem" is a trademark of its creators. [verify trademark holder against LOEL text]
+
+This bot is **not official, not endorsed by, and not affiliated** with the creators or publishers of *Land of Eem*. It is a fan-made tool, compatible with *Land of Eem* under the LOEL.
+
+Use `/about` or `/license` in Discord to display this information to server members.
+
+> **Note on monetization:** If you charge for access to this bot, host it as a paid service, or bundle it in a paid product, review the LOEL's restrictions on commercial use before doing so, as the risk profile changes significantly. [verify against LOEL text]
