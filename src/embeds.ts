@@ -18,7 +18,7 @@ export function buildCharacterCard(c: CharRow): {
   const embed = new EmbedBuilder()
     .setColor(0xba7517)
     .setAuthor({ name: `${c.name} (${c.pronouns})` })
-    .setDescription(`${c.folk} ${c.class} · Level ${c.level} · ${c.xp} XP`);
+    .setDescription(`${c.folk} ${c.class} · Level ${c.level} · ${c.xp} XP${c.kind === 'npc' ? ' · NPC' : ''}`);
 
   if (c.portrait_url) {
     embed.setThumbnail(c.portrait_url);

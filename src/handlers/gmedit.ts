@@ -20,7 +20,7 @@ import { buildCharacterCard } from '../embeds.js';
 const GROUPS = ['vitals', 'attributes', 'combat', 'progress', 'inventory', 'bio'] as const;
 type Group = typeof GROUPS[number];
 
-async function showEditMenu(interaction: RepliableInteraction, charId: number) {
+export async function showEditMenu(interaction: RepliableInteraction, charId: number) {
   const char = getCharById(charId);
   if (!char) {
     await interaction.reply({ content: 'Character not found.', flags: MessageFlags.Ephemeral });

@@ -17,6 +17,7 @@ export interface CharRow {
   level: number;
   xp: number;
   tier: 'lite' | 'full';
+  kind: 'pc' | 'npc';
   vim: number;
   vigor: number;
   knack: number;
@@ -54,6 +55,7 @@ db.exec(`
     level INTEGER DEFAULT 1,
     xp INTEGER DEFAULT 0,
     tier TEXT DEFAULT 'lite',
+    kind TEXT DEFAULT 'pc',
     vim INTEGER DEFAULT 0,
     vigor INTEGER DEFAULT 0,
     knack INTEGER DEFAULT 0,
@@ -75,20 +77,36 @@ db.exec(`
     created_at TEXT DEFAULT (datetime('now')),
     updated_at TEXT DEFAULT (datetime('now'))
   );
-
-  CREATE UNIQUE INDEX IF NOT EXISTS idx_char_owner
-    ON characters(guild_id, owner_user_id);
 `);
 
-const stmtGetByOwner = db.prepare('SELECT * FROM characters WHERE guild_id = ? AND owner_user_id = ?');
+// Idempotent migration: drop unique constraint, add kind column if missing
+function migrate() {
+  const cols = (db.prepare('PRAGMA table_info(characters)').all() as { name: string }[]).map(c => c.name);
+  if (!cols.includes('kind')) {
+    db.exec("ALTER TABLE characters ADD COLUMN kind TEXT DEFAULT 'pc'");
+  }
+  db.exec(`
+    DROP INDEX IF EXISTS idx_char_owner;
+    CREATE INDEX IF NOT EXISTS idx_char_owner ON characters(guild_id, owner_user_id);
+  `);
+}
+
+migrate();
+
+const stmtGetsByOwner = db.prepare('SELECT * FROM characters WHERE guild_id = ? AND owner_user_id = ? ORDER BY id');
+const stmtGetAll = db.prepare('SELECT * FROM characters WHERE guild_id = ? ORDER BY kind, name');
 const stmtGetById = db.prepare('SELECT * FROM characters WHERE id = ?');
 const stmtInsert = db.prepare(`
-  INSERT INTO characters (guild_id, owner_user_id, name, pronouns, folk, class, homeland)
-  VALUES (@guild_id, @owner_user_id, @name, @pronouns, @folk, @class, @homeland)
+  INSERT INTO characters (guild_id, owner_user_id, name, pronouns, folk, class, homeland, kind)
+  VALUES (@guild_id, @owner_user_id, @name, @pronouns, @folk, @class, @homeland, @kind)
 `);
 
-export function getCharByOwner(guildId: string, userId: string): CharRow | undefined {
-  return stmtGetByOwner.get(guildId, userId) as CharRow | undefined;
+export function getCharsByOwner(guildId: string, userId: string): CharRow[] {
+  return stmtGetsByOwner.all(guildId, userId) as CharRow[];
+}
+
+export function getAllChars(guildId: string): CharRow[] {
+  return stmtGetAll.all(guildId) as CharRow[];
 }
 
 export function getCharById(id: number): CharRow | undefined {
@@ -103,8 +121,9 @@ export function createChar(partial: {
   folk: string;
   class: string;
   homeland: string;
+  kind?: 'pc' | 'npc';
 }): CharRow {
-  const info = stmtInsert.run(partial);
+  const info = stmtInsert.run({ kind: 'pc', ...partial });
   return getCharById(info.lastInsertRowid as number)!;
 }
 

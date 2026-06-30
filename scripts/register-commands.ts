@@ -7,12 +7,28 @@ const commands = [
     .setName('character')
     .setDescription('Character management')
     .addSubcommand(sub =>
-      sub.setName('create').setDescription('Create your character sheet'),
+      sub
+        .setName('create')
+        .setDescription('Create a character sheet')
+        .addStringOption(opt =>
+          opt
+            .setName('kind')
+            .setDescription('PC or NPC (GM only for NPC)')
+            .setRequired(false)
+            .addChoices({ name: 'PC', value: 'pc' }, { name: 'NPC', value: 'npc' }),
+        ),
     ),
 
   new SlashCommandBuilder()
     .setName('sheet')
-    .setDescription('View your character sheet publicly'),
+    .setDescription('View your character sheet publicly')
+    .addStringOption(opt =>
+      opt
+        .setName('character')
+        .setDescription('Which character (if you have more than one)')
+        .setRequired(false)
+        .setAutocomplete(true),
+    ),
 
   new SlashCommandBuilder()
     .setName('gm')
@@ -23,6 +39,13 @@ const commands = [
         .setDescription("Post a player's character card publicly")
         .addUserOption(opt =>
           opt.setName('user').setDescription('The player').setRequired(true),
+        )
+        .addStringOption(opt =>
+          opt
+            .setName('character')
+            .setDescription('Which character (if the player has more than one)')
+            .setRequired(false)
+            .setAutocomplete(true),
         ),
     )
     .addSubcommand(sub =>
@@ -31,6 +54,13 @@ const commands = [
         .setDescription("Edit a player's character stats")
         .addUserOption(opt =>
           opt.setName('user').setDescription('The player (omit to edit your own)').setRequired(false),
+        )
+        .addStringOption(opt =>
+          opt
+            .setName('character')
+            .setDescription('Which character (if the player has more than one)')
+            .setRequired(false)
+            .setAutocomplete(true),
         ),
     ),
 ];
