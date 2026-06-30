@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Original software copyright [YEAR] [YOUR NAME]. See LICENSE.
+// Copyright 2026 nsuurmey. See LICENSE.
 //
 // SRD-DERIVED CONTENT: The Band type values and the numeric ranges in bandFor()
 // (Complete Failure 1-2, Failure with a Plus 3-5, Success with a Twist 6-8,
