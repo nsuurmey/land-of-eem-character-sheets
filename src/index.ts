@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { Client, GatewayIntentBits, Events, MessageFlags, StringSelectMenuBuilder, ActionRowBuilder, type GuildTextBasedChannel } from 'discord.js';
+import { Client, GatewayIntentBits, Events, MessageFlags, StringSelectMenuBuilder, ActionRowBuilder } from 'discord.js';
 import { DISCORD_TOKEN, isGM } from './config.js';
 import { getCharsByOwner, getAllChars } from './db.js';
 import { buildCharacterCard } from './embeds.js';
@@ -197,7 +197,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
           }
           const { embed, components } = buildCharacterCard(char);
           await interaction.deferUpdate();
-          await (interaction.channel as GuildTextBasedChannel).send({ embeds: [embed], components });
+          await interaction.followUp({ embeds: [embed], components });
         } else if (context === 'gmedit') {
           if (!isGM(interaction)) {
             await interaction.reply({ content: 'Only the GM can use this.', flags: MessageFlags.Ephemeral });
