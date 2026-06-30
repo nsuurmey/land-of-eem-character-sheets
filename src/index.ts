@@ -210,6 +210,18 @@ client.on(Events.InteractionCreate, async (interaction) => {
     }
   } catch (err) {
     console.error('Unhandled interaction error:', err);
+    // Try to surface the error to the user so Discord doesn't just show "interaction failed"
+    try {
+      const rep = interaction as { reply?: Function; followUp?: Function; deferred?: boolean; replied?: boolean };
+      const msg = { content: `Bot error: ${(err as Error).message ?? err}`, flags: MessageFlags.Ephemeral };
+      if (rep.replied || rep.deferred) {
+        await rep.followUp?.(msg);
+      } else {
+        await rep.reply?.(msg);
+      }
+    } catch {
+      // ignore secondary failure
+    }
   }
 });
 
