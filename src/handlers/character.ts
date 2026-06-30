@@ -140,7 +140,7 @@ export async function handlePickSelectMenu(interaction: StringSelectMenuInteract
 
   if (context === 'sheet') {
     const { embed, components } = buildCharacterCard(char);
-    await interaction.update({ content: '', components: [] });
+    await interaction.deferUpdate();
     await (interaction.channel as GuildTextBasedChannel).send({ embeds: [embed], components });
   }
 }
