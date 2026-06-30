@@ -1,13 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
-// Original software copyright [YEAR] [YOUR NAME]. See LICENSE.
+// Copyright 2026 nsuurmey. See LICENSE.
 //
 // SRD-DERIVED CONTENT: The "Folk", "Class", and "Homeland" field labels are Land of
 // Eem character creation terminology from the SRD, governed by the Land of Eem Open
 // License. See LICENSES/LAND-OF-EEM-OPEN-LICENSE.md. They are NOT licensed under Apache 2.0.
-//
-// REVIEW REQUIRED: The placeholder text "Hobble, Mellow" in the Folk label may reference
-// setting-specific folk names not included in the SRD. Verify these names appear in the
-// LOEL/SRD before publishing. Replace with generic text (e.g. "your folk") if uncertain.
 
 import {
   ChatInputCommandInteraction,
@@ -42,7 +38,7 @@ export async function handleCharacterCreate(interaction: ChatInputCommandInterac
         new TextInputBuilder().setCustomId('pronouns').setLabel('Pronouns').setStyle(TextInputStyle.Short).setRequired(false),
       ),
       new ActionRowBuilder<TextInputBuilder>().addComponents(
-        new TextInputBuilder().setCustomId('folk').setLabel('Folk (e.g. Hobble, Mellow, etc.)').setStyle(TextInputStyle.Short).setRequired(false),
+        new TextInputBuilder().setCustomId('folk').setLabel('Folk (your character\'s folk)').setStyle(TextInputStyle.Short).setRequired(false),
       ),
       new ActionRowBuilder<TextInputBuilder>().addComponents(
         new TextInputBuilder().setCustomId('class').setLabel('Class (e.g. Ruffian, Rogue, etc.)').setStyle(TextInputStyle.Short).setRequired(false),

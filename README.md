@@ -183,24 +183,47 @@ Gateway intents: `Guilds` only. No privileged intents required.
 
 ## Licensing & Compliance
 
-This project uses **two licenses**. They apply to different parts of the codebase.
+**Compatible with Land of Eem.**
+
+> This work was created using the Land Of Eem TTRPG Open License.
+> Land Of Eem TTRPG Open License, v.1.0 Copyright 2025, Ben Costa and James Parks.
+
+This project uses **two licenses** that apply to different parts of the codebase.
 
 ### Original source code — Apache License 2.0
 
-All original TypeScript source code, configuration files, scripts, and build documentation are copyright [YEAR] [YOUR NAME] and licensed under the **Apache License, Version 2.0**. See [`LICENSE`](LICENSE).
+All original TypeScript source code, configuration files, scripts, and build
+documentation are copyright 2026 nsuurmey and licensed under the
+**Apache License, Version 2.0**. See [`LICENSE`](LICENSE).
 
 ### Land of Eem SRD-derived content — Land of Eem Open License
 
-Game terminology, result band definitions (Complete Failure, Failure with a Plus, Success with a Twist, Success, Complete Success), and attribute names (Vim, Vigor, Knack, Knowhow, Courage, Dread, Quest Points) are derived from the *Land of Eem* System Reference Document (SRD). This content is governed by the **Land of Eem Open License (LOEL)** and is **not** licensed under Apache 2.0.
+Game terminology, result band definitions (Complete Failure, Failure with a Plus,
+Success with a Twist, Success, Complete Success), and attribute names (Vim, Vigor,
+Knack, Knowhow, Courage, Dread, Quest Points) are derived from the *Land of Eem*
+System Reference Document (SRD). This content is governed by the
+**Land of Eem Open License (LOEL) v1.0** and is **not** licensed under Apache 2.0.
 
-See [`LICENSES/LAND-OF-EEM-OPEN-LICENSE.md`](LICENSES/LAND-OF-EEM-OPEN-LICENSE.md) for the full LOEL text and a list of which files contain SRD-derived content.
+The full LOEL text and an index of which files contain SRD-derived content are in
+[`LICENSES/LAND-OF-EEM-OPEN-LICENSE.md`](LICENSES/LAND-OF-EEM-OPEN-LICENSE.md).
 
-### Attribution & disclaimer
+### Disclaimer
 
-*Land of Eem* was created by **Ben Costa and James Parks**. "Land of Eem" is a trademark of its creators. [verify trademark holder against LOEL text]
+This bot is not official, not endorsed by, and not affiliated with the creators or
+publishers of *Land of Eem*. "Land of Eem" is a trademark of Ben Costa and James Parks.
 
-This bot is **not official, not endorsed by, and not affiliated** with the creators or publishers of *Land of Eem*. It is a fan-made tool, compatible with *Land of Eem* under the LOEL.
+Use `/about` or `/license` in Discord to surface these notices to server members.
 
-Use `/about` or `/license` in Discord to display this information to server members.
+### Logo (LOEL §3 requirement)
 
-> **Note on monetization:** If you charge for access to this bot, host it as a paid service, or bundle it in a paid product, review the LOEL's restrictions on commercial use before doing so, as the risk profile changes significantly. [verify against LOEL text]
+The LOEL requires affixing the official **Land of Eem Compatible Logo** to the cover
+of any work using the SRD. For this repository the cover is this README. Obtain the
+Compatible Logo from the official Land of Eem channels and place it here before
+publishing or distributing this project publicly.
+
+### Note on monetization
+
+The LOEL permits selling compatible works. However, it prohibits AI-generated content
+in commercial products and requires a separate enterprise agreement if your operation
+exceeds $10M annual revenue or 500 employees. Review the full LOEL before charging for
+access to or distribution of this bot.

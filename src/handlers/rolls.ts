@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Original software copyright [YEAR] [YOUR NAME]. See LICENSE.
+// Copyright 2026 nsuurmey. See LICENSE.
 //
 // SRD-DERIVED CONTENT: KEY_LABELS values (Vim, Vigor, Knack, Knowhow) are Land of
 // Eem attribute names from the SRD, governed by the Land of Eem Open License.
