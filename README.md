@@ -2,6 +2,16 @@
 
 A Discord bot for play-by-post *Land of Eem* games. Stores character sheets and displays each as a card (embed + buttons) in chat. Players tap buttons to roll; results post publicly so the GM adjudicates. Only the GM can edit stats.
 
+## The Game Land of Eem
+
+Land of Eem is a whimsical fantasy tabletop roleplaying game about adventurers exploring the strange ruins and stories of a forgotten age.
+
+It was created by Ben Costa and James Parks, the team behind Rickety Stitch and the Gelatinous Goo and Dungeoneer Adventures.
+
+The game blends wonder, humor, and classic adventure in a setting often described as “Lord of the Rings meets The Muppets.”
+
+To learn more, visit the official site at landofeem.com.
+
 ## Features
 
 - Character sheets stored in SQLite, displayed as gold Discord embeds
