@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/src/index.js",
     "register": "tsx scripts/register-commands.ts",
     "dev": "tsx src/index.ts",
     "typecheck": "tsc --noEmit",
