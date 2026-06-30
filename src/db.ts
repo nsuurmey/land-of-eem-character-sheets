@@ -1,5 +1,9 @@
 import Database from 'better-sqlite3';
+import { mkdirSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 import { DATABASE_PATH } from './config.js';
+
+mkdirSync(dirname(resolve(DATABASE_PATH)), { recursive: true });
 
 export interface CharRow {
   id: number;
