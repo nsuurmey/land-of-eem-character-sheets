@@ -12,19 +12,14 @@ const KEY_LABELS: Record<string, string> = {
   knack: 'Knack',
   knowhow: 'Knowhow',
   attack: 'Attack',
-  defend: 'Defend',
 };
 
-// Maps button key -> CharRow stat field
-// CONFIRM: 'defend' uses the 'defense' stat as a d12 modifier. If Defense is a static
-// target number rather than a roll, drop the Defend button in embeds.ts instead.
 const KEY_TO_STAT: Record<string, keyof CharRow> = {
   vim: 'vim',
   vigor: 'vigor',
   knack: 'knack',
   knowhow: 'knowhow',
   attack: 'attack',
-  defend: 'defense',
 };
 
 export async function handleRollButton(interaction: ButtonInteraction) {

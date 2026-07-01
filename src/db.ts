@@ -3,7 +3,9 @@ import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { DATABASE_PATH } from './config.js';
 
-mkdirSync(dirname(resolve(DATABASE_PATH)), { recursive: true });
+const absDbPath = resolve(DATABASE_PATH);
+console.log(`[db] opening SQLite at ${absDbPath}`);
+mkdirSync(dirname(absDbPath), { recursive: true });
 
 export interface CharRow {
   id: number;
@@ -24,6 +26,7 @@ export interface CharRow {
   knowhow: number;
   attack: number;
   defense: number;
+  block: number;
   dread_die: string;
   courage_current: number;
   courage_max: number;
@@ -40,7 +43,7 @@ export interface CharRow {
   updated_at: string;
 }
 
-const db = new Database(DATABASE_PATH);
+const db = new Database(absDbPath);
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS characters (
@@ -62,6 +65,7 @@ db.exec(`
     knowhow INTEGER DEFAULT 0,
     attack INTEGER DEFAULT 0,
     defense INTEGER DEFAULT 10,
+    block INTEGER DEFAULT 0,
     dread_die TEXT DEFAULT 'd6',
     courage_current INTEGER DEFAULT 6,
     courage_max INTEGER DEFAULT 6,
@@ -79,11 +83,13 @@ db.exec(`
   );
 `);
 
-// Idempotent migration: drop unique constraint, add kind column if missing
 function migrate() {
   const cols = (db.prepare('PRAGMA table_info(characters)').all() as { name: string }[]).map(c => c.name);
   if (!cols.includes('kind')) {
     db.exec("ALTER TABLE characters ADD COLUMN kind TEXT DEFAULT 'pc'");
+  }
+  if (!cols.includes('block')) {
+    db.exec('ALTER TABLE characters ADD COLUMN block INTEGER DEFAULT 0');
   }
   db.exec(`
     DROP INDEX IF EXISTS idx_char_owner;

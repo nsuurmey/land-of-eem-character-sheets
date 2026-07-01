@@ -15,9 +15,13 @@ export function buildCharacterCard(c: CharRow): {
   embed: EmbedBuilder;
   components: ActionRowBuilder<ButtonBuilder>[];
 } {
+  const displayName = c.pronouns?.trim()
+    ? `${c.name} (${c.pronouns.trim()})`
+    : c.name;
+
   const embed = new EmbedBuilder()
     .setColor(0xba7517)
-    .setAuthor({ name: `${c.name} (${c.pronouns})` })
+    .setAuthor({ name: displayName })
     .setDescription(`${c.folk} ${c.class} · Level ${c.level} · ${c.xp} XP${c.kind === 'npc' ? ' · NPC' : ''}`);
 
   if (c.portrait_url) {
@@ -38,7 +42,7 @@ export function buildCharacterCard(c: CharRow): {
     },
     {
       name: 'Vitals',
-      value: `Courage ${c.courage_current}/${c.courage_max} · Attack ${fmtMod(c.attack)} · Dread ${c.dread_die} · Defense ${c.defense} · Quest ${c.quest_pts}`,
+      value: `Courage ${c.courage_current}/${c.courage_max} · Attack ${fmtMod(c.attack)} · Defense ${c.defense} · Block ${c.block} · Dread ${c.dread_die} · Quest ${c.quest_pts}`,
       inline: true,
     },
     {
@@ -62,9 +66,6 @@ export function buildCharacterCard(c: CharRow): {
   );
 
   const row2 = new ActionRowBuilder<ButtonBuilder>().addComponents(
-    // CONFIRM: Defend treated as d12 + defense modifier. If Defense is a static target number
-    // rather than a roll, remove this button entirely.
-    new ButtonBuilder().setCustomId(encode(['roll', id, 'defend'])).setLabel('Defend').setStyle(ButtonStyle.Secondary),
     new ButtonBuilder().setCustomId(encode(['dread', id])).setLabel('Roll Dread').setStyle(ButtonStyle.Danger),
     new ButtonBuilder().setCustomId(encode(['gmedit', id])).setLabel('Edit · GM').setStyle(ButtonStyle.Primary),
   );

@@ -136,8 +136,7 @@ export async function handleGmModalSubmit(interaction: ModalSubmitInteraction) {
       const dreadDie = str('dread_die');
       const attack = int('attack', 'Attack');
       const defense = int('defense', 'Defense');
-      const courageMax = int('courage_max', 'Courage max');
-      const courageCurrent = int('courage_current', 'Courage current');
+      const block = int('block', 'Block');
       if (dreadDie !== undefined) {
         if (!/^d(6|8|10|12)$/.test(dreadDie)) {
           errors.push('Dread die must be d6, d8, d10, or d12');
@@ -147,8 +146,7 @@ export async function handleGmModalSubmit(interaction: ModalSubmitInteraction) {
       }
       if (attack !== undefined) patch.attack = attack;
       if (defense !== undefined) patch.defense = defense;
-      if (courageMax !== undefined) patch.courage_max = courageMax;
-      if (courageCurrent !== undefined) patch.courage_current = courageCurrent;
+      if (block !== undefined) patch.block = block;
       break;
     }
     case 'progress': {
@@ -236,8 +234,7 @@ function buildGroupModal(charIdStr: string, group: Group, char: CharRow): ModalB
         field('dread_die', 'Dread Die (d6/d8/d10/d12)', char.dread_die),
         field('attack', 'Attack', String(char.attack)),
         field('defense', 'Defense', String(char.defense)),
-        field('courage_max', 'Courage (max)', String(char.courage_max)),
-        field('courage_current', 'Courage (current)', String(char.courage_current)),
+        field('block', 'Block', String(char.block)),
       ];
       break;
     case 'progress':
