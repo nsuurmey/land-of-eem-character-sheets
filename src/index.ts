@@ -1,13 +1,12 @@
 import 'dotenv/config';
 import { Client, GatewayIntentBits, Events, MessageFlags, StringSelectMenuBuilder, ActionRowBuilder } from 'discord.js';
 import { DISCORD_TOKEN, isGM } from './config.js';
-import { getCharsByOwner, getAllChars } from './db.js';
+import { getCharsByOwner, getAllChars, getCharById, updateChar } from './db.js';
 import { buildCharacterCard } from './embeds.js';
 import {
   handleCharacterCreate,
   handleCharCreateModalSubmit,
   handleSheet,
-  handleSheetAutocomplete,
   handlePickSelectMenu,
 } from './handlers/character.js';
 import { handleRollButton, handleDreadButton } from './handlers/rolls.js';
@@ -41,15 +40,33 @@ client.on(Events.InteractionCreate, async (interaction) => {
         if (commandName === 'sheet') {
           const chars = getCharsByOwner(guildId, interaction.user.id);
           await interaction.respond(
-            chars.filter(c => c.name.toLowerCase().includes(query)).slice(0, 25).map(c => ({ name: c.name, value: String(c.id) })),
+            chars.filter(c => c.name.toLowerCase().includes(query)).slice(0, 25)
+              .map(c => ({ name: c.name, value: String(c.id) })),
           );
         } else if (commandName === 'gm') {
-          // For gm commands, autocomplete over all guild chars or target user's chars
-          const userOpt = interaction.options.get('user');
-          const targetId = (userOpt?.value as string | undefined) ?? interaction.user.id;
-          const chars = getCharsByOwner(guildId, targetId);
+          const sub = interaction.options.getSubcommand();
+          if (sub === 'assign') {
+            // All guild chars, NPCs flagged
+            const chars = getAllChars(guildId);
+            await interaction.respond(
+              chars.filter(c => c.name.toLowerCase().includes(query)).slice(0, 25)
+                .map(c => ({ name: c.kind === 'npc' ? `${c.name} · NPC` : c.name, value: String(c.id) })),
+            );
+          } else {
+            // show / edit — target user's chars
+            const userOpt = interaction.options.get('user');
+            const targetId = (userOpt?.value as string | undefined) ?? interaction.user.id;
+            const chars = getCharsByOwner(guildId, targetId);
+            await interaction.respond(
+              chars.filter(c => c.name.toLowerCase().includes(query)).slice(0, 25)
+                .map(c => ({ name: c.name, value: String(c.id) })),
+            );
+          }
+        } else if (commandName === 'courage') {
+          const chars = getAllChars(guildId);
           await interaction.respond(
-            chars.filter(c => c.name.toLowerCase().includes(query)).slice(0, 25).map(c => ({ name: c.name, value: String(c.id) })),
+            chars.filter(c => c.name.toLowerCase().includes(query)).slice(0, 25)
+              .map(c => ({ name: c.kind === 'npc' ? `${c.name} · NPC` : c.name, value: String(c.id) })),
           );
         } else {
           await interaction.respond([]);
@@ -158,7 +175,47 @@ client.on(Events.InteractionCreate, async (interaction) => {
             components: [new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(select)],
             flags: MessageFlags.Ephemeral,
           });
+
+        } else if (sub === 'assign') {
+          const charIdStr = interaction.options.getString('character', true);
+          const user = interaction.options.getUser('user', true);
+          const charId = parseInt(charIdStr, 10);
+          const char = getCharById(charId);
+          if (!char || char.guild_id !== interaction.guildId) {
+            await interaction.reply({ content: 'Character not found.', flags: MessageFlags.Ephemeral });
+            return;
+          }
+          updateChar(charId, { owner_user_id: user.id });
+          await interaction.reply({
+            content: `Ownership of **${char.name}** → <@${user.id}>.`,
+            flags: MessageFlags.Ephemeral,
+          });
         }
+
+      } else if (commandName === 'courage') {
+        if (!isGM(interaction)) {
+          await interaction.reply({ content: 'Only the GM can use this command.', flags: MessageFlags.Ephemeral });
+          return;
+        }
+        const charIdStr = interaction.options.getString('character', true);
+        const amount = interaction.options.getInteger('amount', true);
+        const charId = parseInt(charIdStr, 10);
+        const char = getCharById(charId);
+        if (!char || char.guild_id !== interaction.guildId) {
+          await interaction.reply({ content: 'Character not found.', flags: MessageFlags.Ephemeral });
+          return;
+        }
+        if (amount === 0) {
+          await interaction.reply({ content: 'No change.', flags: MessageFlags.Ephemeral });
+          return;
+        }
+        const old = char.courage_current;
+        const next = Math.max(0, Math.min(char.courage_max, old + amount));
+        updateChar(charId, { courage_current: next });
+        const sign = amount > 0 ? `+${amount}` : `${amount}`;
+        let msg = `**${char.name}** — Courage ${old} → ${next} / ${char.courage_max} (${sign})`;
+        if (next === 0) msg += ' — down!';
+        await interaction.reply(msg);
       }
 
     // Modal submits
