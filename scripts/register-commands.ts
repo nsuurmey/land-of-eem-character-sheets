@@ -16,6 +16,12 @@ const commands = [
             .setDescription('PC or NPC (GM only for NPC)')
             .setRequired(false)
             .addChoices({ name: 'PC', value: 'pc' }, { name: 'NPC', value: 'npc' }),
+        )
+        .addUserOption(opt =>
+          opt
+            .setName('owner')
+            .setDescription('Player who owns this character (GM only — defaults to you)')
+            .setRequired(false),
         ),
     ),
 
@@ -62,6 +68,38 @@ const commands = [
             .setRequired(false)
             .setAutocomplete(true),
         ),
+    )
+    .addSubcommand(sub =>
+      sub
+        .setName('assign')
+        .setDescription('Transfer ownership of a character to a player')
+        .addStringOption(opt =>
+          opt
+            .setName('character')
+            .setDescription('The character to reassign')
+            .setRequired(true)
+            .setAutocomplete(true),
+        )
+        .addUserOption(opt =>
+          opt.setName('user').setDescription('The player to assign it to').setRequired(true),
+        ),
+    ),
+
+  new SlashCommandBuilder()
+    .setName('courage')
+    .setDescription('Adjust a character\'s current Courage (positive heals, negative damages)')
+    .addStringOption(opt =>
+      opt
+        .setName('character')
+        .setDescription('The character')
+        .setRequired(true)
+        .setAutocomplete(true),
+    )
+    .addIntegerOption(opt =>
+      opt
+        .setName('amount')
+        .setDescription('Amount to add (positive) or subtract (negative)')
+        .setRequired(true),
     ),
 ];
 

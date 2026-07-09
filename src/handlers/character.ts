@@ -19,9 +19,11 @@ import { isGM } from '../config.js';
 export async function handleCharacterCreate(interaction: ChatInputCommandInteraction) {
   const kindOpt = interaction.options.getString('kind') ?? 'pc';
   const kind = (isGM(interaction) && kindOpt === 'npc') ? 'npc' : 'pc';
+  const ownerUser = isGM(interaction) ? interaction.options.getUser('owner') : null;
+  const ownerId = ownerUser?.id ?? interaction.user.id;
 
   const modal = new ModalBuilder()
-    .setCustomId(encode(['char_create', kind]))
+    .setCustomId(encode(['char_create', kind, ownerId]))
     .setTitle('Create Character')
     .addComponents(
       new ActionRowBuilder<TextInputBuilder>().addComponents(
@@ -48,8 +50,9 @@ export async function handleCharCreateModalSubmit(interaction: ModalSubmitIntera
   const guildId = interaction.guildId!;
   const userId = interaction.user.id;
 
-  const [, kind] = decode(interaction.customId);
+  const [, kind, ownerId] = decode(interaction.customId);
   const charKind = kind === 'npc' ? 'npc' : 'pc';
+  const ownerUserId = ownerId || userId;
 
   const name = interaction.fields.getTextInputValue('name');
   const pronouns = interaction.fields.getTextInputValue('pronouns') ?? '';
@@ -57,7 +60,7 @@ export async function handleCharCreateModalSubmit(interaction: ModalSubmitIntera
   const cls = interaction.fields.getTextInputValue('class') ?? '';
   const homeland = interaction.fields.getTextInputValue('homeland') ?? '';
 
-  const char = createChar({ guild_id: guildId, owner_user_id: userId, name, pronouns, folk, class: cls, homeland, kind: charKind });
+  const char = createChar({ guild_id: guildId, owner_user_id: ownerUserId, name, pronouns, folk, class: cls, homeland, kind: charKind });
 
   await interaction.reply({
     content: 'Character created. Ask the GM to set your stats.',
