@@ -1,6 +1,5 @@
 # Land of Eem — Discord Character Sheet Bot
 
-<img src="https://github.com/nsuurmey/land-of-eem-character-sheets/blob/main/assets/Land%20of%20Eem%20Compatible%20Logo.png" width="250" alt="Land of Eem Compatible">
 
 A Discord bot for play-by-post *Land of Eem* games. Stores character sheets and displays each as a card (embed + buttons) in chat. Players tap buttons to roll; results post publicly so the GM adjudicates. Only the GM can edit stats.
 
@@ -20,6 +19,9 @@ To learn more, visit [landofeem.com](https://landofeem.com).
 - GM-only stat editing via select menu → prefilled modal
 - Ephemeral permission denials; all rolls are public
 - Guild-scoped slash commands for instant updates in dev
+
+  
+<img src="https://github.com/nsuurmey/land-of-eem-character-sheets/blob/main/assets/Land%20of%20Eem%20Compatible%20Logo.png" width="250" alt="Land of Eem Compatible">
 
 ---
 
